@@ -14,6 +14,7 @@ jar.enabled = false
 
 repositories {
     mavenCentral()
+    mavenLocal()
     maven {
         name = 'sponge'
         url = 'http://repo.spongepowered.org/maven'
@@ -30,7 +31,7 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
-    compile 'org.spongepowered:spongeapi:7.0.0-SNAPSHOT'
+    compile 'org.spongepowered:spongeapi:7.1.0-SNAPSHOT'
     compile 'net.minecrell.mcstats:statslite-sponge:0.2.2'
     compile 'io.github.nucleuspowered:nucleus-api:0.22.0-S5.1'
     compile files('libs/MCClans-API-1.4-SNAPSHOT.jar')
@@ -39,12 +40,11 @@ dependencies {
 shadowJar {
     dependencies {
         include dependency('nl.riebie:mcclans-api')
-        include dependency('net.minecrell.mcstats:statslite-sponge')
-        include dependency('io.github.nucleuspowered:nucleus-api')
     }
 
     relocate 'net.minecrell.mcstats', 'nl.riebie.mcclans.mcstats'
-
+    archiveName = rootProject.name + '-' + project.version + '.jar'
+    /*
     Boolean devBuild = System.getenv("DEV_BUILD") as Boolean ?: false;
     Boolean relBuild = System.getenv("REL_BUILD") as Boolean ?: false;
     if (devBuild) {
@@ -55,6 +55,7 @@ shadowJar {
     } else {
         archiveName = rootProject.name + '-' + project.version + '-LOCAL' + '.jar'
     }
+    */
 }
 
 artifacts {
